@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>👹 平行四辺形 性質・条件マスター</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <script>window.MathJax={tex:{inlineMath:[['\\(','\\)']]},startup:{typeset:false}};</script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="style.css?v=20260719-layout2">
+</head>
+<body>
+  <section id="start-screen" class="screen active">
+    <main class="start-card">
+      <div class="logo">▱</div><h1>平行四辺形</h1><p class="subtitle">性質・条件マスター</p>
+      <p class="level-label">レベルをえらぼう（各10問）</p>
+      <div class="levels">
+        <button class="level active" data-level="1"><b>Lv.1</b><span>基本</span></button>
+        <button class="level" data-level="2"><b>Lv.2</b><span>標準</span></button>
+        <button class="level" data-level="3"><b>Lv.3</b><span>発展</span></button>
+      </div>
+      <button id="card-btn" class="card-btn">📚 性質・条件カードを見る</button>
+      <div class="high-score">👑 最高スコア <strong id="high-score">0</strong> 点</div>
+      <section class="history"><header><b>📋 学習履歴</b><button id="reset-btn">リセット</button></header><div id="history-list">まだ記録がないよ！</div></section>
+      <button id="start-btn" class="primary large">スタート！</button>
+    </main>
+  </section>
+
+  <section id="quiz-screen" class="screen">
+    <header class="quiz-header"><button id="quit-btn" class="quiet">ホーム</button><b>👹 平行四辺形 <span id="level-tag">Lv.1</span></b><div><span id="counter">Q 1 / 10</span><div class="progress"><div id="progress-fill"></div></div></div><strong id="score">0点</strong></header>
+    <main class="quiz-main">
+      <section class="work"><article class="question-card"><div class="prompt-pane"><div class="prompt-copy"><p id="question-kind" class="kind"></p><div id="question-text" class="question-text"></div><p id="question-note" class="question-note"></p></div><div id="response-row" class="response-row"><section id="answer-card" class="answer-card"></section><section id="feedback" class="feedback hidden"></section></div></div><div id="diagram" class="diagram" aria-label="問題の図"></div></article></section>
+      <aside class="hints"><button id="hint-btn" class="hint-btn">💡 ヒント</button><p class="hint-guide">1段階ずつ、考え方を確かめよう。<br>最後のヒントは答えの確認です。</p><div id="hint-warning" class="warning hidden">⚠️ 次のヒントは答えだよ！見ると不正解で確定します。</div><div id="hint-list"></div></aside>
+    </main>
+    <footer><button id="submit-btn" class="primary">判定する</button><button id="next-btn" class="secondary hidden">次へ</button></footer>
+  </section>
+
+  <section id="result-screen" class="screen"><main class="result-card"><h2>結果発表！</h2><div id="result-score" class="result-score"></div><p id="result-message" class="result-message"></p><section class="review"><h3>振り返り</h3><div id="review-list"></div></section><div class="result-actions"><button id="retry-btn" class="primary">もう一度</button><button id="wrong-btn" class="secondary hidden">まちがいだけ復習</button><button id="home-btn" class="secondary">ホームへ</button></div></main></section>
+
+  <dialog id="card-dialog"><article><button id="close-card" class="close">×</button><h2>性質・条件カード</h2><h3>平行四辺形の性質</h3><ol><li>2組の対辺はそれぞれ等しい</li><li>2組の対角はそれぞれ等しい</li><li>対角線はそれぞれの中点で交わる</li></ol><h3>平行四辺形になるための条件</h3><ol><li>2組の対辺がそれぞれ平行</li><li>2組の対辺がそれぞれ等しい</li><li>1組の対辺が平行で、その長さが等しい</li><li>対角線がそれぞれの中点で交わる</li><li>2組の対角がそれぞれ等しい</li></ol></article></dialog>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://unpkg.com/mathlive@0.98.4/dist/mathlive.min.js"></script>
+  <script src="questions.js?v=20260719-layout2"></script><script src="diagram.js?v=20260719-layout2"></script><script src="main.js?v=20260719-layout2"></script>
+</body></html>
