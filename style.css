@@ -9,10 +9,12 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
 body { font-family: var(--font); color: var(--ink); background: linear-gradient(135deg, #fff7ed, #eff6ff 55%, #f5f3ff); }
 button { font-family: var(--font); cursor: pointer; border: 0; }
 .hidden { display: none !important; }
-.screen { display: none; height: 100dvh; padding: 14px; }
+.screen { display: none; height: 100dvh; padding: 10px; }
 .screen.active { display: block; }
 
-.start-card, .result-card { height: calc(100dvh - 28px); max-width: 760px; margin: auto; padding: 18px; background: #ffffffed; border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+.start-card, .result-card { height: calc(100dvh - 20px); max-width: 760px; margin: auto; padding: 18px; background: #ffffffed; border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+.legal-links { text-align: center; font-size: 11px; color: var(--muted); margin-top: 6px; flex-shrink: 0; }
+.legal-links a { color: inherit; text-decoration: underline; }
 .logo { text-align: center; font-size: 44px; color: var(--blue); font-weight: 900; }
 .start-card h1 { text-align: center; font-size: 38px; color: #ea580c; }
 .subtitle, .level-label { text-align: center; font-weight: 900; }
@@ -30,19 +32,19 @@ button { font-family: var(--font); cursor: pointer; border: 0; }
 .history header button { padding: 4px 9px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--muted); font-weight: 800; }
 #history-list { margin-top: 7px; max-height: 106px; overflow: auto; color: var(--muted); font-size: 13px; line-height: 1.7; }
 
-.primary, .secondary, .hint-btn { padding: 13px 20px; border-radius: 14px; font-size: 17px; font-weight: 900; }
+.primary, .secondary, .hint-btn { padding: 11px 20px; border-radius: 14px; font-size: 16px; font-weight: 900; }
 .primary { color: #fff; background: linear-gradient(135deg, #fb923c, #ef4444); box-shadow: 0 10px 22px #ef44443b; }
 .secondary { background: #fff; border: 2px solid var(--line); color: var(--ink); }.large { width: 100%; font-size: 20px; margin-top: 10px; }
 
-#quiz-screen.active { display: grid; grid-template-rows: 68px minmax(0, 1fr) 70px; gap: 12px; }
-.quiz-header { height: 68px; padding: 9px 12px; background: #ffffffed; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 7px 22px #24324a14; display: grid; grid-template-columns: auto 1fr minmax(190px, 270px) auto; gap: 12px; align-items: center; }
+#quiz-screen.active { display: grid; grid-template-rows: 58px minmax(0, 1fr) 60px; gap: 9px; }
+.quiz-header { height: 58px; padding: 6px 12px; background: #ffffffed; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 7px 22px #24324a14; display: grid; grid-template-columns: auto 1fr minmax(190px, 270px) auto; gap: 12px; align-items: center; }
 .quiet { padding: 10px 12px; border-radius: 10px; background: #eef2f7; color: var(--muted); font-weight: 900; }
 #level-tag { padding: 3px 9px; border-radius: 99px; background: #ede9fe; color: #6d28d9; font-size: 12px; }
 .progress { height: 8px; margin-top: 4px; background: #e2e8f0; border-radius: 99px; overflow: hidden; }.progress > div { height: 100%; background: linear-gradient(90deg, #22c55e, #f97316); transition: .25s; }
 #score { font-size: 20px; color: var(--orange); }
-.quiz-main { min-height: 0; max-width: 1260px; width: 100%; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(280px, .45fr); gap: 14px; }
+.quiz-main { min-height: 0; max-width: 1260px; width: 100%; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.62fr) minmax(240px, .38fr); gap: 12px; }
 .work { min-height: 0; display: flex; flex-direction: column; gap: 10px; }.question-card, .answer-card, .feedback, .hints { background: #ffffffed; border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 9px 26px #24324a14; }
-.question-card { flex: 1; min-height: 0; padding: 14px; display: grid; grid-template-columns: minmax(330px, .78fr) minmax(500px, 1.32fr); align-items: stretch; gap: 14px; }
+.question-card { flex: 1; min-height: 0; padding: 12px; display: grid; grid-template-columns: minmax(400px, 1fr) minmax(420px, 1fr); align-items: stretch; gap: 12px; }
 .prompt-pane { min-height: 0; display: flex; flex-direction: column; justify-content: center; }
 .prompt-copy { flex: 0 0 auto; }
 .kind { font-weight: 900; color: var(--violet); margin-bottom: 8px; }.question-text { font-size: 21px; font-weight: 900; line-height: 1.65; }.question-note { margin-top: 8px; color: var(--muted); font-size: 13px; font-weight: 700; }
@@ -53,17 +55,39 @@ button { font-family: var(--font); cursor: pointer; border: 0; }
 .special-lab.is-dragging .lab-handle-visual { fill: #0057e7; stroke-width: 3; }
 .diagram.interaction-locked .lab-handle { pointer-events: none; cursor: default; opacity: 1; }
 .diagram.interaction-locked .lab-lock { pointer-events: none; opacity: .6; }
-.response-row { width: 100%; min-height: 0; margin-top: 16px; display: grid; grid-template-columns: 1fr; gap: 8px; }.response-row.has-feedback { grid-template-columns: 1fr; }
+.response-row { width: 100%; min-height: 0; margin-top: 12px; display: grid; grid-template-columns: 1fr; gap: 8px; }
+/* 解答後はフィードバック領域が残りの縦幅をすべて使う（反例図が見切れないように） */
+.response-row.has-feedback { flex: 1 1 auto; grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr); }
+/* 解答が確定したら選択ボタンは役目を終える（答えはフィードバック内に再掲される）。
+   その分の縦幅を反例図にまわす。 */
+.response-row.has-feedback > .answer-card { display: none; }
 .answer-card, .feedback { padding: 10px; }.answer-card { display: flex; flex-direction: column; justify-content: center; }.answer-line { display: flex; justify-content: center; align-items: center; gap: 7px; font-size: 21px; font-weight: 900; }
 .math-wrap { width: 105px; border: 2px solid var(--line); border-radius: 12px; overflow: hidden; }.math-wrap:focus-within { border-color: var(--orange); box-shadow: 0 0 0 4px #fed7aa; }
 math-field { width: 100%; min-height: 45px; padding: 5px; text-align: center; font-size: 22px; border: 0; } math-field::part(menu-toggle), math-field::part(virtual-keyboard-toggle) { display: none; }.answer-card p { text-align: center; margin: 8px 0 0; color: var(--muted); font-size: 12px; }
 .choice-title { font-weight: 900; text-align: center; margin-bottom: 10px; }.choice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }.choice-grid.wide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .compact-choices .choice-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .choice { min-height: 48px; padding: 8px; border: 2px solid var(--line); border-radius: 11px; background: #fff; text-align: left; font-size: 14px; font-weight: 800; }.choice.selected { border-color: var(--orange); background: #fff7ed; box-shadow: 0 0 0 3px #fed7aa; }.choice[disabled] { opacity: .65; }
-.feedback { max-height: 190px; overflow: auto; font-weight: 900; line-height: 1.55; }.feedback.ok { background: #f0fdf4; border-color: #86efac; color: #166534; }.feedback.ng { background: #fff7ed; border-color: #fdba74; color: #9a3412; }.feedback.giveup { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+.feedback { min-height: 0; overflow-y: auto; scrollbar-gutter: stable; font-weight: 900; line-height: 1.5; }
+/* 中がスクロールできることを見た目でわかるようにする（Chromebook = Chrome 想定） */
+.feedback::-webkit-scrollbar { width: 10px; }
+.feedback::-webkit-scrollbar-track { background: #00000008; border-radius: 99px; }
+.feedback::-webkit-scrollbar-thumb { background: #f9731699; border: 2px solid transparent; background-clip: padding-box; border-radius: 99px; }
+.feedback::-webkit-scrollbar-thumb:hover { background: #f97316; background-clip: padding-box; }
+/* 収まりきらないときだけ、スクロールバーと下端の影を必ず出す */
+.feedback.is-scrollable { overflow-y: scroll; box-shadow: inset 0 -20px 16px -16px #9a341255; }
+.feedback.is-scrollable.at-bottom { box-shadow: none; }
+.feedback.is-scrollable .counter-title::after { content: '　▼ 下にスクロールすると続きがあります'; font-weight: 900; color: #c2410c; }.feedback.ok { background: #f0fdf4; border-color: #86efac; color: #166534; }.feedback.ng { background: #fff7ed; border-color: #fdba74; color: #9a3412; }.feedback.giveup { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
 .hints { min-height: 0; padding: 13px; overflow: auto; }.hint-btn { width: 100%; background: #fef3c7; border: 2px solid #fde68a; color: #92400e; }.hint-guide { margin: 12px 4px; color: var(--muted); font-size: 14px; font-weight: 700; line-height: 1.7; }.warning { margin-top: 9px; padding: 9px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px; color: #991b1b; font-weight: 900; font-size: 13px; }.hint-item { margin-top: 9px; padding: 9px; background: #fff7ed; border-left: 5px solid var(--orange); border-radius: 10px; line-height: 1.55; font-weight: 700; }.hint-item.answer { background: #fef2f2; border-left-color: var(--red); }
-#quiz-screen footer { position: static; height: 70px; padding: 9px; background: #fffffffa; border: 1px solid var(--line); border-radius: 16px; display: flex; justify-content: center; gap: 12px; }#quiz-screen footer button { min-width: 180px; }
+#quiz-screen footer { position: static; height: 60px; padding: 5px; background: #fffffffa; border: 1px solid var(--line); border-radius: 16px; display: flex; justify-content: center; gap: 12px; }#quiz-screen footer button { min-width: 180px; }
 
 .result-card { text-align: center; }.result-card h2 { font-size: 31px; }.result-score { font-size: 51px; font-weight: 900; color: var(--orange); margin: 5px; }.result-message { font-size: 19px; font-weight: 900; }.review { min-height: 0; flex: 1; text-align: left; margin-top: 10px; }#review-list { height: 100%; overflow: auto; }.review-item { padding: 10px; margin-top: 7px; background: #f8fafc; border: 1px solid var(--line); border-radius: 12px; line-height: 1.55; }.result-actions { display: flex; gap: 9px; margin-top: 10px; }.result-actions button { flex: 1; }
 dialog { margin: auto; border: 0; border-radius: 18px; box-shadow: var(--shadow); max-width: 600px; padding: 0; color: var(--ink); }dialog::backdrop { background: #24324a80; }dialog article { padding: 24px; line-height: 1.7; }dialog h3 { margin-top: 14px; color: #6d28d9; }.close { float: right; width: 30px; height: 30px; border-radius: 50%; background: #eef2f7; font-size: 21px; }
-@media (max-width: 900px) { html,body { overflow: auto; }.screen, #quiz-screen.active { display: block; height: auto; min-height: 100dvh; }.quiz-main { grid-template-columns: 1fr; margin-bottom: 82px; }.question-card, .response-row, .response-row.has-feedback { grid-template-columns: 1fr; }.diagram { height: 290px; }.quiz-header { height: auto; grid-template-columns: 1fr auto; }.quiz-header > div { grid-column: 1/-1; }#quiz-screen footer { position: fixed; left: 0; right: 0; bottom: 0; border-width: 1px 0 0; border-radius: 0; }.levels { grid-template-columns: 1fr; }.start-card, .result-card { height: auto; min-height: calc(100dvh - 28px); }.choice-grid.wide { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { html,body { overflow: auto; }.screen, #quiz-screen.active { display: block; height: auto; min-height: 100dvh; }.quiz-main { grid-template-columns: 1fr; margin-bottom: 82px; }.question-card, .response-row, .response-row.has-feedback { grid-template-columns: 1fr; }.diagram { height: 290px; }.quiz-header { height: auto; grid-template-columns: 1fr auto; }.quiz-header > div { grid-column: 1/-1; }#quiz-screen footer { position: fixed; left: 0; right: 0; bottom: 0; border-width: 1px 0 0; border-radius: 0; }.levels { grid-template-columns: 1fr; }.start-card, .result-card { height: auto; min-height: calc(100dvh - 20px); }.counter-fig { width: 100%; max-width: 260px; height: auto; aspect-ratio: 250 / 206; }.counter-example { grid-template-columns: minmax(0, 1fr); justify-items: center; }.counter-caption { text-align: center; }.choice-grid.wide { grid-template-columns: 1fr; } }
+
+/* 反例図（タイプDの否定問題のフィードバック内にだけ表示） */
+.counter-example { margin-top: 6px; padding: 6px 8px; border: 1px dashed #fdba74; border-radius: 12px; background: #fffdfa; display: grid; grid-template-columns: auto minmax(120px, 1fr); align-items: center; column-gap: 10px; }
+.counter-title { grid-column: 1 / -1; margin-bottom: 2px; font-size: 12px; font-weight: 900; color: #9a3412; }
+.counter-fig { width: 210px; height: 173px; display: block; }
+.counter-caption { font-size: 13px; font-weight: 700; line-height: 1.55; color: #7c2d12; }
+dialog { max-height: 88vh; overflow: auto; }
+.card-note { margin-top: 8px; padding: 7px 10px; border-left: 4px solid #a78bfa; border-radius: 0 8px 8px 0; background: #f5f3ff; font-size: 13px; line-height: 1.6; }

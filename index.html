@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
   <script>window.MathJax={tex:{inlineMath:[['\\(','\\)']]},startup:{typeset:false}};</script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <link rel="stylesheet" href="style.css?v=20260719-layout2">
+  <link rel="stylesheet" href="style.css?v=20260722-counter7">
 </head>
 <body>
   <section id="start-screen" class="screen active">
@@ -24,6 +24,7 @@
       <div class="high-score">👑 最高スコア <strong id="high-score">0</strong> 点</div>
       <section class="history"><header><b>📋 学習履歴</b><button id="reset-btn">リセット</button></header><div id="history-list">まだ記録がないよ！</div></section>
       <button id="start-btn" class="primary large">スタート！</button>
+      <p class="legal-links"><a href="NOTICE.md" target="_blank" rel="noopener">利用条件・出典・プライバシー</a>　<a href="LICENSE" target="_blank" rel="noopener">LICENSE</a></p>
     </main>
   </section>
 
@@ -38,8 +39,8 @@
 
   <section id="result-screen" class="screen"><main class="result-card"><h2>結果発表！</h2><div id="result-score" class="result-score"></div><p id="result-message" class="result-message"></p><section class="review"><h3>振り返り</h3><div id="review-list"></div></section><div class="result-actions"><button id="retry-btn" class="primary">もう一度</button><button id="wrong-btn" class="secondary hidden">まちがいだけ復習</button><button id="home-btn" class="secondary">ホームへ</button></div></main></section>
 
-  <dialog id="card-dialog"><article><button id="close-card" class="close">×</button><h2>性質・条件カード</h2><h3>平行四辺形の性質</h3><ol><li>2組の対辺はそれぞれ等しい</li><li>2組の対角はそれぞれ等しい</li><li>対角線はそれぞれの中点で交わる</li></ol><h3>平行四辺形になるための条件</h3><ol><li>2組の対辺がそれぞれ平行</li><li>2組の対辺がそれぞれ等しい</li><li>1組の対辺が平行で、その長さが等しい</li><li>対角線がそれぞれの中点で交わる</li><li>2組の対角がそれぞれ等しい</li></ol></article></dialog>
+  <dialog id="card-dialog"><article><button id="close-card" class="close">×</button><h2>性質・条件カード</h2><h3>平行四辺形の性質</h3><ol><li>2組の対辺はそれぞれ等しい</li><li>2組の対角はそれぞれ等しい</li><li>対角線はそれぞれの中点で交わる</li></ol><p class="card-note"><b>性質からの発展</b>：となりあう角の和は180°（AD ∥ BC より、平行線の同じ側にある内角の和）</p><h3>平行四辺形になるための条件</h3><ol><li>2組の対辺がそれぞれ平行</li><li>2組の対辺がそれぞれ等しい</li><li>1組の対辺が平行で、その長さが等しい</li><li>対角線がそれぞれの中点で交わる</li><li>2組の対角がそれぞれ等しい</li></ol></article></dialog>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="https://unpkg.com/mathlive@0.98.4/dist/mathlive.min.js"></script>
-  <script src="questions.js?v=20260719-layout2"></script><script src="diagram.js?v=20260719-layout2"></script><script src="main.js?v=20260719-layout2"></script>
+  <script src="questions.js?v=20260722-counter7"></script><script src="diagram.js?v=20260722-counter7"></script><script src="main.js?v=20260722-counter7"></script>
 </body></html>

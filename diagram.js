@@ -21,6 +21,56 @@ function diagonalCenter(points){return{x:(points.A.x+points.C.x)/2,y:(points.A.y
 function rightAngleAtDiagonalCenter(points,className='condition-blue'){const o=diagonalCenter(points),towardC=pointOn(o,points.C,12),towardD=pointOn(o,points.D,12),u={x:towardC.x-o.x,y:towardC.y-o.y},v={x:towardD.x-o.x,y:towardD.y-o.y},corner={x:o.x+u.x+v.x,y:o.y+u.y+v.y};return `<path class="${className}" d="M${towardC.x.toFixed(1)} ${towardC.y.toFixed(1)} L${corner.x.toFixed(1)} ${corner.y.toFixed(1)} L${towardD.x.toFixed(1)} ${towardD.y.toFixed(1)}"/>`;}
 function genericDiagonals(){return diagonals(GENERIC);}
 
+/* ===== 反例（否定問題の解説用）=====
+   「条件表に載っていないから いえない」ではなく、
+   「条件を満たすのに平行四辺形でない図＝反例が作れるから いえない」を図で示す。
+   座標は既存の描画と同じくハードコードし、印を重ねる方式にそろえる。 */
+function segmentParallel(points,from,to,count=1,className='condition-blue'){const a=points[from],b=points[to],dx=b.x-a.x,dy=b.y-a.y,len=Math.hypot(dx,dy)||1,u={x:dx/len,y:dy/len},n={x:-u.y,y:u.x},m={x:(a.x+b.x)/2,y:(a.y+b.y)/2};let result='';for(let i=0;i<count;i++){const gap=(i-(count-1)/2)*10,c={x:m.x+u.x*gap,y:m.y+u.y*gap},left={x:c.x-u.x*5-n.x*6,y:c.y-u.y*5-n.y*6},tip={x:c.x+u.x*5,y:c.y+u.y*5},right={x:c.x-u.x*5+n.x*6,y:c.y-u.y*5+n.y*6};result+=`<path class="${className}" d="M${left.x.toFixed(1)} ${left.y.toFixed(1)} L${tip.x.toFixed(1)} ${tip.y.toFixed(1)} L${right.x.toFixed(1)} ${right.y.toFixed(1)}"/>`;}return result;}
+function segmentIntersection(p1,p2,p3,p4){const d=(p2.x-p1.x)*(p4.y-p3.y)-(p2.y-p1.y)*(p4.x-p3.x);if(!isFinite(d)||Math.abs(d)<1e-9)return null;const t=((p3.x-p1.x)*(p4.y-p3.y)-(p3.y-p1.y)*(p4.x-p3.x))/d;return{x:p1.x+(p2.x-p1.x)*t,y:p1.y+(p2.y-p1.y)*t};}
+function rightAngleAt(o,toward1,toward2,className='condition-blue'){if(!o)return '';const a=pointOn(o,toward1,11),b=pointOn(o,toward2,11),corner={x:a.x+b.x-o.x,y:a.y+b.y-o.y};return `<path class="${className}" d="M${a.x.toFixed(1)} ${a.y.toFixed(1)} L${corner.x.toFixed(1)} ${corner.y.toFixed(1)} L${b.x.toFixed(1)} ${b.y.toFixed(1)}"/>`;}
+function counterDiagonals(p,className='cd'){return `<path class="${className}" d="M${p.A.x} ${p.A.y} L${p.C.x} ${p.C.y} M${p.B.x} ${p.B.y} L${p.D.x} ${p.D.y}"/>`;}
+function counterVertices(p){const c={x:(p.A.x+p.B.x+p.C.x+p.D.x)/4,y:(p.A.y+p.B.y+p.C.y+p.D.y)/4};let svg=`<path class="cl" d="M${p.A.x} ${p.A.y} L${p.B.x} ${p.B.y} L${p.C.x} ${p.C.y} L${p.D.x} ${p.D.y} Z"/>`;['A','B','C','D'].forEach(name=>{const v=p[name],dx=v.x-c.x,dy=v.y-c.y,len=Math.hypot(dx,dy)||1;svg+=`<text class="cv" x="${(v.x+dx/len*18).toFixed(1)}" y="${(v.y+dy/len*18+5).toFixed(1)}">${name}</text>`;});return svg;}
+
+// 各図は「与えられた条件は満たすが平行四辺形ではない」ことを座標で検算済み。
+const COUNTER_EXAMPLES={
+  'bad-parallel':{
+    name:'台形',
+    // AB=(40,-90)、DC=(24,-54)=0.6×AB なので AB ∥ DC。AD=(170,0) と BC=(154,36) は平行でない。
+    points:{A:{x:38,y:135},B:{x:78,y:45},C:{x:232,y:81},D:{x:208,y:135}},
+    marks:p=>segmentParallel(p,'A','B')+segmentParallel(p,'D','C'),
+    caption:'AB ∥ DC は成り立つが、AD と BC は平行でない。'
+  },
+  'bad-equaldiag':{
+    name:'等脚台形',
+    // AC=(140,-90)、BD=(140,90) で長さは等しい。AB=(40,-90)、DC=(-40,-90) は平行でない。
+    points:{A:{x:40,y:135},B:{x:80,y:45},C:{x:180,y:45},D:{x:220,y:135}},
+    marks:p=>counterDiagonals(p)+segmentTick(p,'A','C',.32,1,'condition-blue')+segmentTick(p,'B','D',.32,1,'condition-blue'),
+    caption:'AC と BD の長さは等しいが、AB と DC は平行でない。'
+  },
+  'bad-perp':{
+    name:'たこ形',
+    // AC は x=125 の縦線、BD は y=70 の横線なので AC ⊥ BD。
+    // AB=AD=√7400（≒86.0）、CB=CD=√13000（≒114.0）でAB≠CBだから平行四辺形ではない。
+    // BD の中点は(125,70)でAC上にあるが、AC の中点は(125,90)でBD上にないため、対角線は互いを2等分しない。
+    points:{A:{x:125,y:20},B:{x:55,y:70},C:{x:125,y:160},D:{x:195,y:70}},
+    marks:p=>{const o=segmentIntersection(p.A,p.C,p.B,p.D);return counterDiagonals(p)+rightAngleAt(o,p.C,p.D)+segmentTick(p,'A','B',.5,1,'condition-blue')+segmentTick(p,'A','D',.5,1,'condition-blue')+segmentTick(p,'C','B',.5,2,'condition-blue')+segmentTick(p,'C','D',.5,2,'condition-blue');},
+    caption:'AC ⊥ BD は成り立つが、BD は AC を2等分していない。'
+  },
+  'bad-sides':{
+    name:'AD だけ長さのちがう四角形',
+    // AB=BC=CD=100。AD の長さは約166で、AB と DC も平行でない。
+    points:{A:{x:45,y:145},B:{x:45,y:45},C:{x:145,y:45},D:{x:209.3,y:121.6}},
+    marks:p=>segmentTick(p,'A','B',.5,1,'condition-blue')+segmentTick(p,'B','C',.5,1,'condition-blue')+segmentTick(p,'C','D',.5,1,'condition-blue'),
+    caption:'AB = BC = CD は成り立つが、AD だけ長さがちがう。'
+  }
+};
+function renderCounterExample(criterion){
+  const spec=COUNTER_EXAMPLES[criterion];if(!spec)return '';
+  // viewBox は上下に余白を足してある（頂点ラベルを大きくしても切れないようにするため）。
+  const style='<style>.cl{stroke:#9a3412;stroke-width:3;fill:#fff7ed}.cd{stroke:#c2865c;stroke-width:2;stroke-dasharray:6 5;fill:none}.cv{font:900 24px Outfit,sans-serif;fill:#9a3412;text-anchor:middle}.condition-blue{stroke:#2563eb;stroke-width:2.5;fill:none;stroke-linecap:round}</style>';
+  return `<div class="counter-example"><p class="counter-title">反例：${esc(spec.name)}</p><svg class="counter-fig" viewBox="0 -14 250 206" role="img" aria-label="反例の図：${esc(spec.name)}">${style}${counterVertices(spec.points)}${spec.marks(spec.points)}</svg><p class="counter-caption">${esc(spec.caption)}</p></div>`;
+}
+
 function renderDiagram(fig){if(fig.mode==='interactive')return interactiveTemplate(fig);const base=`<svg viewBox="0 0 440 300" role="img"><style>.l{stroke:#24324a;stroke-width:3;fill:none}.d{stroke:#94a3b8;stroke-width:2;stroke-dasharray:7 6}.v{font:900 18px Outfit,sans-serif;fill:#24324a}.arc-known,.length-known{stroke:#2563eb;stroke-width:3;fill:none}.arc-ask,.length-ask{stroke:#dc2626;stroke-width:3;fill:none}.angle-known,.angle-ask,.length-known-text,.length-ask-text{font:800 16px Outfit,sans-serif;text-anchor:middle;dominant-baseline:middle}.angle-known,.length-known-text{fill:#2563eb}.angle-ask,.length-ask-text{fill:#dc2626}.condition-blue{stroke:#2563eb;stroke-width:2.5;fill:none;stroke-linecap:round}.special-mark{stroke:#dc2626;stroke-width:3;fill:none}.special-text{font:800 16px Outfit,sans-serif;fill:#dc2626;text-anchor:middle}</style>`;return base+(fig.mode==='generic'?generic(fig.criterion):parallelogram(fig))+`</svg>`;}
 
 function lockControls(){return `<button type="button" class="lab-lock" data-lock="angle" aria-pressed="false">🔓 角度をロック</button><button type="button" class="lab-lock" data-lock="length" aria-pressed="false">🔓 長さをロック</button>`;}
